@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget"/>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>800</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuMain_Window">
+    <property name="title">
+     <string>Main Window</string>
+    </property>
+    <widget class="QMenu" name="menuitem_3">
+     <property name="title">
+      <string>item 3</string>
+     </property>
+     <addaction name="actioncheck_1"/>
+     <addaction name="actioncheck_2"/>
+     <addaction name="actioncheck_3"/>
+    </widget>
+    <widget class="QMenu" name="menuitem_1">
+     <property name="title">
+      <string>item 1</string>
+     </property>
+     <addaction name="actionitem_1_1"/>
+     <addaction name="actionitem_1_2"/>
+    </widget>
+    <widget class="QMenu" name="menuitem_2">
+     <property name="title">
+      <string>item 2</string>
+     </property>
+     <addaction name="actionitem_2_1"/>
+     <addaction name="actionitem_2_2"/>
+    </widget>
+    <addaction name="menuitem_1"/>
+    <addaction name="menuitem_2"/>
+    <addaction name="separator"/>
+    <addaction name="menuitem_3"/>
+   </widget>
+   <widget class="QMenu" name="menuinfo">
+    <property name="title">
+     <string>help</string>
+    </property>
+    <addaction name="actioninfo"/>
+   </widget>
+   <addaction name="menuMain_Window"/>
+   <addaction name="menuinfo"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="actioninfo">
+   <property name="text">
+    <string>about</string>
+   </property>
+  </action>
+  <action name="actionitem_1_1">
+   <property name="text">
+    <string>item 1.1</string>
+   </property>
+  </action>
+  <action name="actionitem_1_2">
+   <property name="text">
+    <string>item 1.2</string>
+   </property>
+  </action>
+  <action name="actionitem_2_1">
+   <property name="text">
+    <string>item 2.1</string>
+   </property>
+  </action>
+  <action name="actionitem_2_2">
+   <property name="text">
+    <string>item 2.2</string>
+   </property>
+  </action>
+  <action name="actioncheck_1">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>check 1</string>
+   </property>
+  </action>
+  <action name="actioncheck_2">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>check 2</string>
+   </property>
+  </action>
+  <action name="actioncheck_3">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>check 3</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
