@@ -2,6 +2,7 @@
 
 #include <QApplication>
 #include <boost/asio.hpp>
+#include <iostream>
 
 // Defines
 void do_stuff();
