@@ -3,10 +3,19 @@
 #include <QApplication>
 #include <boost/asio.hpp>
 
+// Defines
+void do_stuff();
+
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     MainWindow w;
     w.show();
+    do_stuff();
     return a.exec();
+}
+
+void do_stuff()
+{
+    std::cout << "Do stff!!..." << '\n';
 }
