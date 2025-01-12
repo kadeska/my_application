@@ -2,6 +2,7 @@
 #define MAINWINDOW_HPP
 
 #include <QMainWindow>
+#include "settings_window.hpp"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -15,9 +16,16 @@ class MainWindow : public QMainWindow
 
 public:
     MainWindow(QWidget *parent = nullptr);
+    Settings_window settingswindow;
     ~MainWindow();
+
+private slots:
+    void on_actionOpen_triggered();
+
+    void on_actionSave_triggered();
 
 private:
     Ui::MainWindow *ui;
+
 };
 #endif // MAINWINDOW_HPP

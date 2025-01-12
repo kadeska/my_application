@@ -23,6 +23,8 @@ qt_add_executable(my_application
     mainwindow.cpp
     mainwindow.hpp
     mainwindow.ui
+    settings_window.hpp settings_window.cpp settings_window.ui
+
 )
 
 # Include Boost headers and link libraries

@@ -5,6 +5,7 @@
 #include <iostream>
 
 // Defines
+void init();
 void do_stuff();
 
 int main(int argc, char *argv[])
@@ -15,6 +16,8 @@ int main(int argc, char *argv[])
     do_stuff();
     return a.exec();
 }
+
+void init() {}
 
 void do_stuff()
 {
