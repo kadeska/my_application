@@ -1,4 +1,5 @@
 #include "mainwindow.hpp"
+#include "openglwindow.hpp"
 
 #include <QApplication>
 #include <boost/asio.hpp>
@@ -14,6 +15,7 @@ int main(int argc, char *argv[])
     MainWindow w;
     w.show();
     do_stuff();
+    //OpenglWindow glWindow;
     return a.exec();
 }
 

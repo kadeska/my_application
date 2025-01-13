@@ -1,6 +1,9 @@
 #include "settings_window.hpp"
 #include "ui_settings_window.h"
+#include "helper.hpp"
 #include <iostream>
+
+Helper helper;
 
 Settings_window::Settings_window(QWidget *parent)
     : QDialog(parent)
@@ -40,5 +43,6 @@ void Settings_window::on_testbutton_clicked()
 void Settings_window::on_volume_valueChanged(int value)
 {
     std::cout << value << '\n';
+    helper.color_add_value = value; // Using volume value for this temporary as a proof of concept.
 }
 
