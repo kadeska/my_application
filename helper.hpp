@@ -1,9 +1,22 @@
-#pragma once
-class Helper
-{
+#ifndef HELPER_HPP
+#define HELPER_HPP
+
+// A simple helper class for shared utility purposes
+class Helper {
 public:
     Helper() {}
-    float color_add_value;
 };
 
+// Declare the global helper instance
 extern Helper helper;
+
+// Namespace for background color variables
+namespace Background_color {
+// RGBA color value additions. These are used to manipulate the background color.
+extern float R; // Red component
+extern float G; // Green component
+extern float B; // Blue component
+extern float A; // Alpha component (opacity)
+}
+
+#endif // HELPER_HPP

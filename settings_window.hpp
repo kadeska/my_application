@@ -19,11 +19,25 @@ private slots: // values are stored as long as the mainwindow is still running. 
 
     void on_checkBox_debug_checkStateChanged(const Qt::CheckState &arg1);
 
-    void on_volume_actionTriggered(int action);
+    void on_slider_volume_valueChanged(int value);
 
-    void on_testbutton_clicked();
+    void on_slider_R_valueChanged(int value);
 
-    void on_volume_valueChanged(int value);
+    void on_slider_G_valueChanged(int value);
+
+    void on_slider_B_valueChanged(int value);
+
+    void on_slider_A_valueChanged(int value);
+
+    void on_Set_volume_clicked();
+
+    void on_Set_R_clicked();
+
+    void on_Set_G_clicked();
+
+    void on_Set_B_clicked();
+
+    void on_Set_A_clicked();
 
 private:
     Ui::Settings_window *ui;
