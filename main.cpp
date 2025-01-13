@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
     MainWindow w;
     w.show();
     do_stuff();
-    //OpenglWindow glWindow;
+    //OpenglWindow glWindow; OpenGl window is now opened in the mainwindow actionbar.
     return a.exec();
 }
 
