@@ -1,27 +1,33 @@
 #include "mainwindow.hpp"
-#include "openglwindow.hpp"
+//#include "glWindow/glWindowCore/openglwindow.hpp"
+#include "game/core/gamecore.hpp"
 
 #include <QApplication>
 #include <boost/asio.hpp>
 #include <iostream>
 
 // Defines
+
 void init();
-void do_stuff();
+void init_game();
+
+//functions
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     MainWindow w;
     w.show();
-    do_stuff();
+    init_game();
     //OpenglWindow glWindow; OpenGl window is now opened in the mainwindow actionbar.
     return a.exec();
 }
 
 void init() {}
 
-void do_stuff()
+void init_game()
 {
-    std::cout << "Do stff!!..." << '\n';
+    std::cout << "init game!!..." << '\n';
+    GameCore gamecore(1, true);
+    gamecore.init();
 }

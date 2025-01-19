@@ -20,62 +20,74 @@ find_package(Boost REQUIRED COMPONENTS system)
 # Qt standard setup
 qt_standard_project_setup()
 
+# Collect source files
+set(SOURCE_FILES
+    main.cpp
+    mainwindow.cpp
+    settings_window.cpp
+    glWindow/glWindowCore/openglwindow.cpp
+    glWindow/glWindowCore/shader.cpp
+    glWindow/glWindowCore/texture.cpp
+    glWindow/glWindowCore/controls.cpp
+    game/core/gamecore.cpp
+)
+
+# Collect header files
+set(HEADER_FILES
+    mainwindow.hpp
+    settings_window.hpp
+    helper.hpp
+    glWindow/glWindowCore/openglwindow.hpp
+    glWindow/glWindowCore/shader.hpp
+    glWindow/glWindowCore/texture.hpp
+    glWindow/glWindowCore/controls.hpp
+    game/core/gamecore.hpp
+)
+
+# Collect UI files
+set(UI_FILES
+    ui/mainwindow.ui
+    ui/settings_window.ui
+)
+
 # Add the executable
 qt_add_executable(my_application
     WIN32 MACOSX_BUNDLE
-    main.cpp
-    mainwindow.cpp
-    mainwindow.hpp
-    mainwindow.ui
-    settings_window.hpp settings_window.cpp settings_window.ui
-    openglwindow.hpp openglwindow.cpp
-    shader.hpp shader.cpp
-    SimpleVertexShader.vertexshader
-    SimpleFragmentShader.fragmentshader
-    helper.hpp
+    ${SOURCE_FILES}
+    ${HEADER_FILES}
+    ${UI_FILES}
 )
 
-# Fallback for GLEW if not found
-if(NOT GLEW_FOUND)
-    message(WARNING "GLEW not found automatically. Using manually specified paths.")
-    include_directories(${GLEW_INCLUDE_DIRS})
-    target_link_libraries(my_application PRIVATE ${GLEW_LIBRARIES})
-else()
-    target_link_libraries(my_application PRIVATE GLEW::GLEW)
-endif()
-
-# No need for find_package(GLFW when using manual paths
-message(STATUS "Using manually specified GLFW include and library paths.")
-
-# Manually include GLFW
-include_directories(${GLFW_INCLUDE_DIRS})
-target_link_libraries(my_application PRIVATE ${GLFW_LIBRARIES})
-
-# Ensure Boost is properly included
-if(Boost_FOUND)
-    target_include_directories(my_application PRIVATE ${Boost_INCLUDE_DIRS})
-    target_link_libraries(my_application PRIVATE Boost::system)
-else()
-    message(FATAL_ERROR "Boost not found. Make sure Boost is installed and accessible.")
-endif()
+# Include and link libraries
+target_include_directories(my_application PRIVATE
+    glWindow/glWindowCore
+    ${GLEW_INCLUDE_DIRS}
+    ${GLFW_INCLUDE_DIRS}
+    ${Boost_INCLUDE_DIRS}
+)
 
 # Link libraries
 target_link_libraries(my_application
     PRIVATE
-        Qt::Core
-        Qt::Widgets
-        Qt::OpenGL
-        Qt::Gui
+        Qt6::Core
+        Qt6::Gui
+        Qt6::Widgets
+        Qt6::OpenGL
+        ${GLEW_LIBRARIES}
+        ${GLFW_LIBRARIES}
+        Boost::system
 )
 
-# Copy shader files to the build directory
-configure_file(SimpleVertexShader.vertexshader ${CMAKE_BINARY_DIR}/SimpleVertexShader.vertexshader COPYONLY)
-configure_file(SimpleFragmentShader.fragmentshader ${CMAKE_BINARY_DIR}/SimpleFragmentShader.fragmentshader COPYONLY)
+# Copy shader and texture files to the build directory
+configure_file(glWindow/gl/shaders/SimpleVertexShader.vertexshader ${CMAKE_BINARY_DIR}/SimpleVertexShader.vertexshader COPYONLY)
+configure_file(glWindow/gl/shaders/SimpleFragmentShader.fragmentshader ${CMAKE_BINARY_DIR}/SimpleFragmentShader.fragmentshader COPYONLY)
+configure_file(glWindow/gl/uvtemplate.DDS ${CMAKE_BINARY_DIR}/uvtemplate.DDS COPYONLY)
 
-# Install rules for shader files
+# Install rules for shaders and textures
 install(FILES
-    SimpleVertexShader.vertexshader
-    SimpleFragmentShader.fragmentshader
+    glWindow/gl/shaders/SimpleVertexShader.vertexshader
+    glWindow/gl/shaders/SimpleFragmentShader.fragmentshader
+    glWindow/gl/uvtemplate.DDS
     DESTINATION ${CMAKE_INSTALL_BINDIR}
 )
 

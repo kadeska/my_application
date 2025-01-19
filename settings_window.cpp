@@ -1,5 +1,5 @@
 #include "settings_window.hpp"
-#include "ui_settings_window.h"
+#include "ui/ui_settings_window.h"
 #include "helper.hpp"
 #include <iostream>
 

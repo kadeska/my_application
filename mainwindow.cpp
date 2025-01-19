@@ -1,6 +1,6 @@
 #include "mainwindow.hpp"
-#include "ui_mainwindow.h"
-#include "openglwindow.hpp"
+#include "ui/ui_mainwindow.h"
+#include "glWindow/glWindowCore/openglwindow.hpp"
 #include "settings_window.hpp"
 #include <iostream>
 
