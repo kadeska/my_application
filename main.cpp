@@ -1,6 +1,7 @@
 #include "mainwindow.hpp"
 //#include "glWindow/glWindowCore/openglwindow.hpp"
 #include "game/core/gamecore.hpp"
+#include "game/core/gameclock.hpp"
 
 #include <QApplication>
 #include <boost/asio.hpp>
@@ -10,6 +11,10 @@
 
 void init();
 void init_game();
+
+GameClock gameClock;
+
+
 
 //functions
 
@@ -28,6 +33,9 @@ void init() {}
 void init_game()
 {
     std::cout << "init game!!..." << '\n';
-    GameCore gamecore(1, true);
+
+
+    GameCore gamecore(1, true, gameClock);
+    gameClock.start();
     gamecore.init();
 }

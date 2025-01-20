@@ -56,6 +56,7 @@ qt_add_executable(my_application
     ${SOURCE_FILES}
     ${HEADER_FILES}
     ${UI_FILES}
+    game/core/gameclock.hpp game/core/gameclock.cpp
 )
 
 # Include and link libraries
