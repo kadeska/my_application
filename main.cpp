@@ -12,8 +12,8 @@
 void init();
 void init_game();
 
-GameClock gameClock;
-
+//GameClock gameClock;
+GameClock* gameClock = nullptr;
 
 
 //functions
@@ -23,8 +23,11 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
     MainWindow w;
     w.show();
+    gameClock = new GameClock();
     init_game();
     //OpenglWindow glWindow; OpenGl window is now opened in the mainwindow actionbar.
+
+    //delete gameClock;
     return a.exec();
 }
 
@@ -34,8 +37,7 @@ void init_game()
 {
     std::cout << "init game!!..." << '\n';
 
-
-    GameCore gamecore(1, true, gameClock);
-    gameClock.start();
+    GameCore gamecore(1, true, *gameClock);
+    gameClock->start();
     gamecore.init();
 }
