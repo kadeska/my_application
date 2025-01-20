@@ -10,6 +10,9 @@ public:
     ~GameCore(); // Destructor
 
     void init();
+    //bool gameRunning;
+    // MyEntity player;
+    // MyEntity enemy;
 
 private:
     int game_ID;

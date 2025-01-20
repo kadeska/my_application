@@ -10,6 +10,8 @@ class GameClock : public QObject { // Properly named class
 public:
     explicit GameClock(QObject* parent = nullptr); // Constructor matches the class name
 
+    bool isRunning;      // Game running state
+
     void start();
 
 private slots:
@@ -23,7 +25,11 @@ private:
     QTimer tickTimer;    // Timer for game ticks
     QTimer eventTimer;   // Timer for custom events
     const int tickInterval; // Tick interval in milliseconds
-    bool isRunning;      // Game running state
+
+
+    int frameCount;
+    int gameLogicUpdateCount;
+    int gameTickCount;
 };
 
 #endif // GAME_CLOCK_HPP

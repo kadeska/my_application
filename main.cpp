@@ -23,7 +23,7 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
     MainWindow w;
     w.show();
-    gameClock = new GameClock();
+
     init_game();
     //OpenglWindow glWindow; OpenGl window is now opened in the mainwindow actionbar.
 
@@ -37,7 +37,8 @@ void init_game()
 {
     std::cout << "init game!!..." << '\n';
 
+    gameClock = new GameClock();
     GameCore gamecore(1, true, *gameClock);
-    gameClock->start();
+    //gameClock->start();
     gamecore.init();
 }

@@ -17,5 +17,8 @@ GameCore::~GameCore() {}
 void GameCore::init() {
     std::cout << "Game ID: " << game_ID << '\n';
     std::cout << "Game Debug: " << game_Debug << '\n';
+    if(!game_Clock.isRunning){
+        std::cout << "gameClock is not running!!... \n";
+    }
 
 }
