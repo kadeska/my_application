@@ -46,11 +46,13 @@ void MainWindow::on_actionGL_Window_triggered()
     this->hide();
 
     // create ref for gameClock
-    GameClock gameClock;
+    GameClock* gameClock = new GameClock();
 
     // create ref for gameCore
     GameCore gamecore(1, true, gameClock);
     gamecore.init();
+    gamecore.gameRunning = true;
+    //gamecore.game_Clock.start();
     OpenglWindow glWindow; //game window gets created here
     this->setVisible(true);
 }

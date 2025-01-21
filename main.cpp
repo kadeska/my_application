@@ -23,5 +23,6 @@ int main(int argc, char *argv[])
     //OpenglWindow glWindow; OpenGl window is now opened in the mainwindow actionbar.
 
     //delete gameClock;
+    std::cout << "exec \n";
     return a.exec();
 }

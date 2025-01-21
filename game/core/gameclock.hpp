@@ -4,15 +4,14 @@
 #include <QObject>
 #include <QTimer>
 
-class GameClock : public QObject { // Properly named class
+class GameClock : public QObject {
     Q_OBJECT
 
 public:
-    explicit GameClock(QObject* parent = nullptr); // Constructor matches the class name
+    explicit GameClock(QObject* parent = nullptr);
 
-    bool isRunning;      // Game running state
-
-    void start();
+    void start(); // Starts the game clock
+    bool isRunning() const { return running; } // Getter for running state
 
 private slots:
     void gameTick();
@@ -22,14 +21,14 @@ private:
     void update();
     void render();
 
-    QTimer tickTimer;    // Timer for game ticks
-    QTimer eventTimer;   // Timer for custom events
+    QTimer tickTimer;       // Timer for game ticks
+    QTimer eventTimer;      // Timer for custom events
     const int tickInterval; // Tick interval in milliseconds
+    bool running;           // Whether the clock is running
 
-
-    int frameCount;
-    int gameLogicUpdateCount;
-    int gameTickCount;
+    int frameCount;         // Frame count
+    int gameLogicUpdateCount; // Logic update count
+    int gameTickCount;      // Tick count
 };
 
 #endif // GAME_CLOCK_HPP

@@ -10,7 +10,7 @@ bool gameRunning;
 
 //functions
 
-GameCore::GameCore(int gameID, bool gameDebug, GameClock& gameClock)
+GameCore::GameCore(int gameID, bool gameDebug, GameClock* gameClock)
     : game_ID(gameID), game_Debug(gameDebug), game_Clock(gameClock) {
     // Initialization logic
     std::cout << "GameCore constructor \n";
@@ -27,24 +27,19 @@ void GameCore::init() {
 
     std::cout << "init game!!..." << '\n';
 
-    //gameClock = new GameClock();
-    //GameCore gamecore(1, true, *gameClock);
-    //gameClock->start();
-    //gamecore.init();
-
-    if(!game_Clock.isRunning){
+    if (!game_Clock->isRunning()) {
         std::cout << "gameClock is not running!!... \n";
         std::cout << "Starting gameClock... \n";
-        // start gameClock
-        game_Clock.start();
+        game_Clock->start();  // Start the clock
+    } else {
+        std::cout << "gameClock is already running... \n";
     }
 
-    if(!gameRunning) {
+    if (!gameRunning) {
         std::cout << "gameRunning is false \n";
-        // set game rnning to true
+        gameRunning = true;  // Set gameRunning to true
         std::cout << "Setting gameRunning to true \n";
-        gameRunning = true;
     }
-
 }
+
 
