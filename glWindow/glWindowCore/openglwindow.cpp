@@ -23,9 +23,19 @@ using namespace glm;
 #include "shader.hpp"
 #include "texture.hpp"
 #include "controls.hpp"
+#include "../../game/core/gamecore.hpp"
 
-OpenglWindow::OpenglWindow()
+//bool gameRunning;
+
+OpenglWindow::OpenglWindow() //game window
 {
+    // Set gameRunning to true
+    //GameCore core;
+    //gameRunning = true;
+    //init();
+    //GameCore gameCore;
+    //gameCore.init();
+
 
     // Initialize GLFW
     if( !glfwInit() )
