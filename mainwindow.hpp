@@ -22,6 +22,7 @@ public:
 private slots:
     void on_actionSave_triggered();
 
+    // This is where the openGl game window is opened.
     void on_actionGL_Window_triggered();
 
     void on_actionSettings_triggered();

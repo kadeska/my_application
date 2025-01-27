@@ -1,4 +1,6 @@
 #include "gameclock.hpp"
+#include "../../helper.hpp"
+
 #include <iostream>
 
 // Constructor
@@ -8,8 +10,10 @@ GameClock::GameClock(QObject* parent)
     running(false),     // Initialize as not running
     frameCount(0),
     gameLogicUpdateCount(0),
-    gameTickCount(0) {
-    std::cout << "GameClock constructor \n";
+    gameTickCount(0)
+{
+    // std::cout << "GameClock constructor \n";
+    helper.log("GameClock(QObject* parent)");
 
     // Set up the main game loop
     //connect(&tickTimer, &QTimer::timeout, this, &GameClock::gameTick);

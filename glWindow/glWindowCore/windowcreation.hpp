@@ -21,4 +21,5 @@ private:
 
     void setupOpenGL();
     void terminate();
+    void genBuffers();
 };

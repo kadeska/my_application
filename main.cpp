@@ -1,5 +1,6 @@
 #include "mainwindow.hpp"
 //#include "glWindow/glWindowCore/openglwindow.hpp"
+#include "helper.hpp"
 
 
 #include <QApplication>
@@ -16,13 +17,13 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
     MainWindow w;
     w.show();
-    std::cout << "Debug out: main function \n";
-
-    //init_game(); // this should only be called when the game window is opened.
-
-    //OpenglWindow glWindow; OpenGl window is now opened in the mainwindow actionbar.
-
-    //delete gameClock;
-    std::cout << "exec \n";
+    helper.log("Main Function");
+    std::string out = "main(argc: " + std::to_string(argc) + ", argv: [";
+    for (int i = 0; i < argc; ++i) {
+        out += "\"" + std::string(argv[i]) + "\"";
+        if (i < argc - 1) out += ", ";  // Add a comma between arguments
+    }
+    out += "])";
+    helper.log(out);
     return a.exec();
 }

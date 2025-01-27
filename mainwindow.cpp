@@ -1,9 +1,11 @@
 #include "mainwindow.hpp"
+#include "helper.hpp"
 #include "ui/ui_mainwindow.h"
 //#include "glWindow/glWindowCore/openglwindow.hpp"
 #include "glWindow/glWindowCore/windowcreation.hpp"
 #include "settings_window.hpp"
 #include "game/core/gamecore.hpp"
+
 
 #include <iostream>
 
@@ -20,6 +22,7 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    helper.log("MainWindow()");
 }
 
 MainWindow::~MainWindow()
@@ -29,7 +32,8 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_actionSave_triggered()
 {
-    std::cout << "Save triggered...\n";
+    //std::cout << "Save triggered...\n";
+    helper.log("Save Triggered . . . ");
 }
 
 
@@ -38,12 +42,15 @@ void MainWindow::on_actionSave_triggered()
  * @brief MainWindow::on_actionGL_Window_triggered
  *
  * This is where the game window will be triggered.
- * We will make a ref to gameCore which will kickoff everything.
+ * We will make a ref to gameCore and game clock,
+ * then create the window which will kickoff
+ * everything, using gameCore.
  *
  */
 void MainWindow::on_actionGL_Window_triggered()
 {
-    std::cout << "Open GL Window triggered...\n";
+    // std::cout << "Open GL Window triggered...\n";
+    helper.log("OpenGL Window Triggered");
     this->hide();
 
     // Create GameClock
