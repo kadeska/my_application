@@ -19,4 +19,30 @@ extern float B; // Blue component
 extern float A; // Alpha component (opacity)
 }
 
+namespace usefullFunctions {
+class StdOutput
+{
+public:
+    StdOutput();
+};
+
+class QtOutput
+{
+public:
+    QtOutput();
+};
+
+class Calculation
+{
+public:
+    Calculation();
+};
+
+class misc
+{
+public:
+    misc();
+};
+}
+
 #endif // HELPER_HPP
