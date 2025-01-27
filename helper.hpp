@@ -1,48 +1,80 @@
 #ifndef HELPER_HPP
 #define HELPER_HPP
 
-// A simple helper class for shared utility purposes
+#include <iostream>
+#include <string>
+
 class Helper {
 public:
-    Helper() {}
+    Helper() = default;
+
+    // Example utility function: clamps a value between a minimum and maximum
+    static float clamp(float value, float min, float max) {
+        return (value < min) ? min : (value > max) ? max : value;
+    }
+
+    // Example utility function: log messages
+    static void log(const std::string& message) {
+        std::cout << "[LOG]: " << message << std::endl;
+    }
 };
 
 // Declare the global helper instance
 extern Helper helper;
 
-// Namespace for background color variables
-namespace Background_color {
-// RGBA color value additions. These are used to manipulate the background color.
-extern float R; // Red component
-extern float G; // Green component
-extern float B; // Blue component
-extern float A; // Alpha component (opacity)
+// Namespace for managing background color
+namespace BackgroundColor {
+// Encapsulate RGBA values and provide getters/setters
+inline float R = 0.0f;
+inline float G = 0.0f;
+inline float B = 0.0f;
+inline float A = 1.0f;
+
+void setColor(float red, float green, float blue, float alpha);
+void getColor(float& red, float& green, float& blue, float& alpha);
 }
 
-namespace usefullFunctions {
-class StdOutput
-{
+// Namespace for organizing various utilities
+namespace UsefulFunctions {
+
+class StdOutput {
 public:
-    StdOutput();
+    StdOutput() = default;
+
+    // Example function: print a message
+    static void print(const std::string& message) {
+        std::cout << message << std::endl;
+    }
 };
 
-class QtOutput
-{
+class QtOutput {
 public:
-    QtOutput();
+    QtOutput() = default;
+
+    // Placeholder: Example for Qt-specific output functionality
+    void qtSpecificOutput(const std::string& message) {
+        // Add Qt-specific output logic here
+    }
 };
 
-class Calculation
-{
+class Calculation {
 public:
-    Calculation();
+    Calculation() = default;
+
+    // Example function: compute a square
+    static float square(float value) {
+        return value * value;
+    }
 };
 
-class misc
-{
+class Misc {
 public:
-    misc();
+    Misc() = default;
+
+    // Example function: generate a random number
+    static int randomInt(int min, int max);
 };
-}
+
+} // namespace UsefulFunctions
 
 #endif // HELPER_HPP

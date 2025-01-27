@@ -13,8 +13,12 @@ using namespace glm;
 
 #include "controls.hpp"
 
+namespace fun = UsefulFunctions;
+
 WindowCreation::WindowCreation(GameCore* gameCore)
-    : gameCore(gameCore), window(nullptr) {}
+    : gameCore(gameCore), window(nullptr) {
+    // Leave window creation to `initializeWindow`
+}
 
 WindowCreation::~WindowCreation() {
     terminate();
@@ -52,17 +56,23 @@ void WindowCreation::initializeWindow(int width, int height, const std::string& 
 }
 
 void WindowCreation::setupOpenGL() {
-    glClearColor(Background_color::R, Background_color::G, Background_color::B, Background_color::A);
+    helper.log("setupOpenGL()");
+    glClearColor(BackgroundColor::R, BackgroundColor::G, BackgroundColor::B, BackgroundColor::A);
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LESS);
     glEnable(GL_CULL_FACE);
 }
 
 void WindowCreation::startRenderLoop(BaseModel* model) {
+    if (!window) {
+        throw std::runtime_error("Window not initialized before starting render loop");
+    }
+
     do {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        computeMatricesFromInputs();
+        // Ensure computeMatricesFromInputs and related functions are safe to call
+        computeMatricesFromInputs(window);
         glm::mat4 MVP = getProjectionMatrix() * getViewMatrix() * glm::mat4(1.0f);
 
         model->render(MVP);

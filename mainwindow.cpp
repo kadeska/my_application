@@ -1,6 +1,6 @@
 #include "mainwindow.hpp"
 #include "ui/ui_mainwindow.h"
-#include "glWindow/glWindowCore/openglwindow.hpp"
+//#include "glWindow/glWindowCore/openglwindow.hpp"
 #include "glWindow/glWindowCore/windowcreation.hpp"
 #include "settings_window.hpp"
 #include "game/core/gamecore.hpp"
@@ -46,29 +46,46 @@ void MainWindow::on_actionGL_Window_triggered()
     std::cout << "Open GL Window triggered...\n";
     this->hide();
 
-    // create ref for gameClock
+    // Create GameClock
     GameClock* gameClock = new GameClock();
 
-    // create ref for gameCore
+    // Create GameCore
     GameCore* core = new GameCore(1, true, gameClock);
     core->init();
-    //gamecore.gameRunning = true;
-    //gamecore.game_Clock.start();
 
-    // OLD ...
-    OpenglWindow glWindow(core); //game window gets created here
+    // Create WindowCreation
+    WindowCreation* window = new WindowCreation(core);
+    try {
+        window->initializeWindow(800, 600, "OpenGL Window");
+    } catch (const std::exception& e) {
+        std::cerr << "Failed to initialize window: " << e.what() << std::endl;
+        delete window;
+        delete core;
+        delete gameClock;
+        this->show();
+        return;
+    }
 
+    // Create BaseModel
+    BaseModel* model = new BaseModel();
 
-    // NEW ...
-    // WindowCreation* window = new WindowCreation(core);
-    // BaseModel* model = new BaseModel();
-    // window->initializeWindow(600, 800, "test GL");
-    // window->startRenderLoop(model);
+    try {
+        // Start render loop
+        window->startRenderLoop(model);
+    } catch (const std::exception& e) {
+        std::cerr << "Error during render loop: " << e.what() << std::endl;
+    }
 
+    // Clean up
+    delete model;
+    delete window;
+    delete core;
+    delete gameClock;
 
-    std::cout << "test \n";
-    this->setVisible(true);
+    std::cout << "GL Window closed. Returning to Main Window...\n";
+    this->show();
 }
+
 
 
 void MainWindow::on_actionSettings_triggered()

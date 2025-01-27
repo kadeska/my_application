@@ -82,7 +82,7 @@ OpenglWindow::OpenglWindow(GameCore* gameCore)
     glfwSetCursorPos(window, 1024/2, 768/2);
 
     // Dark blue background
-    glClearColor(Background_color::R, Background_color::G, Background_color::B, Background_color::A); // -------------------------------------------- Background color
+    //glClearColor(Background_color::R, Background_color::G, Background_color::B, Background_color::A); // -------------------------------------------- Background color
 
     // Enable depth test
     glEnable(GL_DEPTH_TEST);
@@ -208,7 +208,7 @@ OpenglWindow::OpenglWindow(GameCore* gameCore)
         glUseProgram(programID);
 
         // Compute the MVP matrix from keyboard and mouse input
-        computeMatricesFromInputs();
+        //computeMatricesFromInputs();
         glm::mat4 ProjectionMatrix = getProjectionMatrix();
         glm::mat4 ViewMatrix = getViewMatrix();
         glm::mat4 ModelMatrix = glm::mat4(1.0);
