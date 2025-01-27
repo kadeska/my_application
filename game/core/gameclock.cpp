@@ -13,7 +13,7 @@ GameClock::GameClock(QObject* parent)
     gameTickCount(0)
 {
     // std::cout << "GameClock constructor \n";
-    helper.log("GameClock(QObject* parent)");
+    helper.log(3, "GameClock(QObject* parent)");
 
     // Set up the main game loop
     //connect(&tickTimer, &QTimer::timeout, this, &GameClock::gameTick);
@@ -22,27 +22,35 @@ GameClock::GameClock(QObject* parent)
     //connect(&eventTimer, &QTimer::timeout, this, &GameClock::eventTimerTriggered);
 
     bool tickConnected = connect(&tickTimer, &QTimer::timeout, this, &GameClock::gameTick);
-    std::cout << "Tick timer connected: " << (tickConnected ? "Success" : "Failed") << std::endl;
+    // std::cout << "Tick timer connected: " << (tickConnected ? "Success" : "Failed") << std::endl;
+    helper.string = std::string("Tick timer connected: ") + (tickConnected ? "Success" : "Failed");
+    helper.log(3, helper.string);
 
     bool eventConnected = connect(&eventTimer, &QTimer::timeout, this, &GameClock::eventTimerTriggered);
-    std::cout << "Event timer connected: " << (eventConnected ? "Success" : "Failed") << std::endl;
+    //std::cout << "Event timer connected: " << (eventConnected ? "Success" : "Failed") << std::endl;
+    helper.string = std::string("Event timer connected: ") + (eventConnected ? "Success" : "Failed");
+    helper.log(3, helper.string);
 
 }
 
 // Start the game clock
 void GameClock::start() {
+    helper.log(3, "GameClock::start()");
     if (!running) {
         tickTimer.start(tickInterval); // Start the tick timer
         eventTimer.start(1000);        // Example: 1-second event timer
         running = true;                // Set the running state to true
-        std::cout << "GameClock started" << std::endl;
+        // std::cout << "GameClock started" << std::endl;
+        helper.log(3, "GameClock started");
     } else {
-        std::cout << "GameClock is already running!" << std::endl;
+        // std::cout << "GameClock is already running!" << std::endl;
+        helper.log(3, "GameClock is already running!");
     }
 }
 
 // Handle game ticks
 void GameClock::gameTick() {
+
     // Called every 16ms (approx. 60 FPS)
     update();
     render();

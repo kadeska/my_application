@@ -153,7 +153,7 @@ void WindowCreation::initializeWindow(int width, int height, const std::string& 
 }
 
 void WindowCreation::setupOpenGL() {
-    helper.log("setupOpenGL()");
+    helper.log(3, "setupOpenGL()");
     glClearColor(BackgroundColor::R, BackgroundColor::G, BackgroundColor::B, BackgroundColor::A);
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LESS);
@@ -166,7 +166,7 @@ void WindowCreation::setupOpenGL() {
 }
 
 void WindowCreation::startRenderLoop(BaseModel* model) {
-    helper.log("startRenderLoop()");
+    helper.log(3, "startRenderLoop()");
     if (!window) {
         throw std::runtime_error("Window not initialized before starting render loop");
     }

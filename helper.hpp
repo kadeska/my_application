@@ -4,9 +4,29 @@
 #include <iostream>
 #include <string>
 
+
 class Helper {
 public:
     Helper() = default;
+
+    // This string is for contructing a compound string, used anywhere that helper.hpp is included.
+    std::string string;
+    // logLevel is used to set the programs log level.
+    // 0 = no logging
+
+    /**
+     * @brief logLevel
+     * Used as program log level
+     *
+     * logLevel = 0, 1, 2, 3, 4
+     * 0 = Critical errors only.
+     * 1 = Default, log all errors.
+     * 2 = All info, warnings and errors.
+     * 3 = Debug, everything is logged to output.
+     * 4 = Extensive logging, including tick updates, mouse movements, keyboard input, and anything/everything else.
+     */
+    static int progLogLevel;
+    static int skippedLogCount;
 
     // Example utility function: clamps a value between a minimum and maximum
     static float clamp(float value, float min, float max) {
@@ -14,10 +34,27 @@ public:
     }
 
     // Example utility function: log messages
-    static void log(const std::string& message) {
-        std::cout << "[LOG]: " << message << std::endl;
+    /**
+     * @brief log
+     * @param logLevel
+     * logLevel = 0, 1, 2, 3, 4
+     * 0 = Critical errors only.
+     * 1 = Default, log all errors.
+     * 2 = All info, warnings and errors.
+     * 3 = Debug, everything is logged to output.
+     * 4 = Extensive logging, including tick updates, mouse movements, keyboard input, and anything/everything else.
+     * @param message
+     */
+    static void log(int logLevel, const std::string& message) {
+        if(logLevel <= progLogLevel){
+            std::cout << "[" << logLevel << "]" << "[LOG]: " << message << std::endl;
+        } else {
+            skippedLogCount++;
+        }
     }
 };
+// int Helper::progLogLevel = 1; // Default log level
+// int Helper::skippedLogCount = 0; // Initialize skipped log count
 
 // Declare the global helper instance
 extern Helper helper;
@@ -73,6 +110,7 @@ public:
 
     // Example function: generate a random number
     static int randomInt(int min, int max);
+    static bool IsValid(){return false;}
 };
 
 } // namespace UsefulFunctions

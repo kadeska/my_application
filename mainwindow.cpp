@@ -22,7 +22,7 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    helper.log("MainWindow()");
+    helper.log(3, "MainWindow()");
 }
 
 MainWindow::~MainWindow()
@@ -33,7 +33,7 @@ MainWindow::~MainWindow()
 void MainWindow::on_actionSave_triggered()
 {
     //std::cout << "Save triggered...\n";
-    helper.log("Save Triggered . . . ");
+    helper.log(3, "Save Triggered . . . ");
 }
 
 
@@ -50,7 +50,7 @@ void MainWindow::on_actionSave_triggered()
 void MainWindow::on_actionGL_Window_triggered()
 {
     // std::cout << "Open GL Window triggered...\n";
-    helper.log("OpenGL Window Triggered");
+    helper.log(3, "OpenGL Window Triggered");
     this->hide();
 
     // Create GameClock
