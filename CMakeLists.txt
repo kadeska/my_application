@@ -59,6 +59,9 @@ qt_add_executable(my_application
     game/core/gameclock.hpp game/core/gameclock.cpp
     game/entity/myentity.hpp game/entity/myentity.cpp
     game/entity/player.hpp game/entity/player.cpp
+    glWindow/gl/entity/entitybase.hpp glWindow/gl/entity/entitybase.cpp
+    glWindow/gl/model/basemodel.hpp glWindow/gl/model/basemodel.cpp
+    glWindow/glWindowCore/windowcreation.hpp glWindow/glWindowCore/windowcreation.cpp
 )
 
 # Include and link libraries

@@ -27,7 +27,9 @@ using namespace glm;
 
 //bool gameRunning;
 
-OpenglWindow::OpenglWindow() //game window
+
+OpenglWindow::OpenglWindow(GameCore* gameCore)
+    : gameCore(gameCore) // Initialize the gameCore pointer
 {
     // Set gameRunning to true
     //GameCore core;
@@ -269,6 +271,11 @@ OpenglWindow::OpenglWindow() //game window
 
     // Close OpenGL window and terminate GLFW
     glfwTerminate();
+
+    gameCore->gameRunning = false;
+
+    //stop gameclock
+    gameCore->stop();
 
     return;// 0;
 }

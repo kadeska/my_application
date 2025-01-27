@@ -42,6 +42,7 @@ void GameClock::gameTick() {
     // Called every 16ms (approx. 60 FPS)
     update();
     render();
+    gameTickCount++;
 }
 
 // Handle custom event timer
@@ -55,6 +56,7 @@ void GameClock::update() {
     // Update game logic
     std::cout << "Logic update: " << gameLogicUpdateCount << " Game logic updated" << std::endl;
     gameLogicUpdateCount++;
+
 }
 
 // Render the game
@@ -62,4 +64,8 @@ void GameClock::render() {
     // Render the game (optional for console apps)
     std::cout << "Frame: " << frameCount << " Rendering frame" << std::endl;
     frameCount++;
+}
+
+void GameClock::stop() {
+    tickTimer.stop();
 }

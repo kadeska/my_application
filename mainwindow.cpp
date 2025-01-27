@@ -1,6 +1,7 @@
 #include "mainwindow.hpp"
 #include "ui/ui_mainwindow.h"
 #include "glWindow/glWindowCore/openglwindow.hpp"
+#include "glWindow/glWindowCore/windowcreation.hpp"
 #include "settings_window.hpp"
 #include "game/core/gamecore.hpp"
 
@@ -49,11 +50,23 @@ void MainWindow::on_actionGL_Window_triggered()
     GameClock* gameClock = new GameClock();
 
     // create ref for gameCore
-    GameCore gamecore(1, true, gameClock);
-    gamecore.init();
-    gamecore.gameRunning = true;
+    GameCore* core = new GameCore(1, true, gameClock);
+    core->init();
+    //gamecore.gameRunning = true;
     //gamecore.game_Clock.start();
-    OpenglWindow glWindow; //game window gets created here
+
+    // OLD ...
+    OpenglWindow glWindow(core); //game window gets created here
+
+
+    // NEW ...
+    // WindowCreation* window = new WindowCreation(core);
+    // BaseModel* model = new BaseModel();
+    // window->initializeWindow(600, 800, "test GL");
+    // window->startRenderLoop(model);
+
+
+    std::cout << "test \n";
     this->setVisible(true);
 }
 

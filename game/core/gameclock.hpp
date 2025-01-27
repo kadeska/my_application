@@ -13,6 +13,8 @@ public:
     void start(); // Starts the game clock
     bool isRunning() const { return running; } // Getter for running state
 
+    void stop();
+
 private slots:
     void gameTick();
     void eventTimerTriggered();

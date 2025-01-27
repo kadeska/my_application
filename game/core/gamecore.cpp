@@ -6,7 +6,7 @@
 
 //variables
 
-bool gameRunning;
+//bool gameRunning;
 
 //functions
 
@@ -27,6 +27,9 @@ void GameCore::init() {
 
     std::cout << "init game!!..." << '\n';
 
+    gameRunning = true;
+
+
     if (!game_Clock->isRunning()) {
         std::cout << "gameClock is not running!!... \n";
         std::cout << "Starting gameClock... \n";
@@ -42,4 +45,10 @@ void GameCore::init() {
     }
 }
 
+void GameCore::stop(){
+    if(!gameRunning){
+        std::cout << "Stopping game clock \n";
+        game_Clock->stop();
+    }
+}
 
