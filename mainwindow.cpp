@@ -2,12 +2,14 @@
 #include "helper.hpp"
 #include "ui/ui_mainwindow.h"
 //#include "glWindow/glWindowCore/openglwindow.hpp"
-#include "glWindow/glWindowCore/windowcreation.hpp"
+#include "glWindow/glWindowCore/windowmanager.hpp"
 #include "settings_window.hpp"
 #include "game/core/gamecore.hpp"
 
 
 #include <iostream>
+
+WindowManager* myglWindow;
 
 
 /**
@@ -27,6 +29,7 @@ MainWindow::MainWindow(QWidget *parent)
 
 MainWindow::~MainWindow()
 {
+    helper.log(3, "Cleaning MainWindow");
     delete ui;
 }
 
@@ -54,44 +57,34 @@ void MainWindow::on_actionGL_Window_triggered()
     this->hide();
 
     // Create GameClock
-    GameClock* gameClock = new GameClock();
+    //GameClock* gameClock = new GameClock();
 
     // Create GameCore
-    GameCore* core = new GameCore(1, true, gameClock);
-    core->init();
+    //GameCore* core = new GameCore(1, true, gameClock);
+    //core->init();
 
-    // Create WindowCreation
-    WindowCreation* window = new WindowCreation(core);
+    // Create WindowManager
+
     try {
-        window->initializeWindow(800, 600, "OpenGL Window");
+        // call function to start window
+        //
+        //startWindow();
+        myglWindow = new WindowManager(600, 600, "testing");
+
     } catch (const std::exception& e) {
         std::cerr << "Failed to initialize window: " << e.what() << std::endl;
-        delete window;
-        delete core;
-        delete gameClock;
+        //delete window;
+        //delete core;
+        //delete gameClock;
         this->show();
         return;
     }
 
-    // Create BaseModel
-    BaseModel* model = new BaseModel();
-
-    try {
-        // Start render loop
-        window->startRenderLoop(model);
-    } catch (const std::exception& e) {
-        std::cerr << "Error during render loop: " << e.what() << std::endl;
-    }
-
-    // Clean up
-    delete model;
-    delete window;
-    delete core;
-    delete gameClock;
-
     std::cout << "GL Window closed. Returning to Main Window...\n";
     this->show();
 }
+
+
 
 
 

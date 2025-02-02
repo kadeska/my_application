@@ -20,7 +20,7 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
-    helper.log(2, "Main Function");
+    helper.log(3, "Main Function");
     stdOut.print("Testing standard output");
     std::string out = "main(argc: " + std::to_string(argc) + ", argv: [";
     for (int i = 0; i < argc; ++i) {

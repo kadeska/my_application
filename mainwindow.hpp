@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include "settings_window.hpp"
+//#include "game/core/gamecore.hpp"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -29,6 +30,8 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+
+    //GameCore gameCore;
 
 };
 #endif // MAINWINDOW_HPP

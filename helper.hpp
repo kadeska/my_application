@@ -4,7 +4,10 @@
 #include <iostream>
 #include <string>
 
-
+/**
+ * @brief The Helper class
+ * This class contains shared data and other functions that I may need.
+ */
 class Helper {
 public:
     Helper() = default;

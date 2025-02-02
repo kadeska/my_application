@@ -61,7 +61,8 @@ qt_add_executable(my_application
     game/entity/player.hpp game/entity/player.cpp
     glWindow/gl/entity/entitybase.hpp glWindow/gl/entity/entitybase.cpp
     glWindow/gl/model/basemodel.hpp glWindow/gl/model/basemodel.cpp
-    glWindow/glWindowCore/windowcreation.hpp glWindow/glWindowCore/windowcreation.cpp
+    glWindow/glWindowCore/windowmanager.hpp glWindow/glWindowCore/windowmanager.cpp
+    glWindow/glWindowCore/renderer.hpp glWindow/glWindowCore/renderer.cpp
 )
 
 # Include and link libraries

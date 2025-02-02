@@ -5,7 +5,7 @@
 #include <fstream>
 #include <algorithm>
 #include <sstream>
-using namespace std;
+// using namespace std;
 
 #include <stdlib.h>
 #include <string.h>
@@ -13,8 +13,10 @@ using namespace std;
 #include <GL/glew.h>
 
 #include "shader.hpp"
+#include "../../helper.hpp"
 
 GLuint LoadShaders(const char * vertex_file_path,const char * fragment_file_path){
+    helper.log(3, "LoadShaders(const char * vertex_file_path,const char * fragment_file_path)");
 
     // Create the shaders
     GLuint VertexShaderID = glCreateShader(GL_VERTEX_SHADER);
@@ -29,7 +31,9 @@ GLuint LoadShaders(const char * vertex_file_path,const char * fragment_file_path
         VertexShaderCode = sstr.str();
         VertexShaderStream.close();
     }else{
-        printf("Impossible to open %s. Are you in the right directory ? Don't forget to read the FAQ !\n", vertex_file_path);
+        // printf("Impossible to open %s. Are you in the right directory ? Don't forget to read the FAQ !\n", vertex_file_path);
+        helper.log(2, "Warning... Impossible to open %s. Are you in the right directory ? Don't forget to read the FAQ !");
+        helper.log(2, vertex_file_path);
         getchar();
         return 0;
     }
@@ -49,7 +53,9 @@ GLuint LoadShaders(const char * vertex_file_path,const char * fragment_file_path
 
 
     // Compile Vertex Shader
-    printf("Compiling shader : %s\n", vertex_file_path);
+    // printf("Compiling shader : %s\n", vertex_file_path);
+    helper.string = "Compiling shader : " + std::string(vertex_file_path);
+    helper.log(3, helper.string);
     char const * VertexSourcePointer = VertexShaderCode.c_str();
     glShaderSource(VertexShaderID, 1, &VertexSourcePointer , NULL);
     glCompileShader(VertexShaderID);
@@ -60,13 +66,17 @@ GLuint LoadShaders(const char * vertex_file_path,const char * fragment_file_path
     if ( InfoLogLength > 0 ){
         std::vector<char> VertexShaderErrorMessage(InfoLogLength+1);
         glGetShaderInfoLog(VertexShaderID, InfoLogLength, NULL, &VertexShaderErrorMessage[0]);
-        printf("%s\n", &VertexShaderErrorMessage[0]);
+        // printf("%s\n", &VertexShaderErrorMessage[0]);
+        helper.string = "Error!! " + std::string(&VertexShaderErrorMessage[0]);
+        helper.log(1, helper.string);
     }
 
 
 
     // Compile Fragment Shader
-    printf("Compiling shader : %s\n", fragment_file_path);
+    // printf("Compiling shader : %s\n", fragment_file_path);
+    helper.string = "Compiling shader : " + std::string(fragment_file_path);
+    helper.log(3, helper.string);
     char const * FragmentSourcePointer = FragmentShaderCode.c_str();
     glShaderSource(FragmentShaderID, 1, &FragmentSourcePointer , NULL);
     glCompileShader(FragmentShaderID);
@@ -77,13 +87,16 @@ GLuint LoadShaders(const char * vertex_file_path,const char * fragment_file_path
     if ( InfoLogLength > 0 ){
         std::vector<char> FragmentShaderErrorMessage(InfoLogLength+1);
         glGetShaderInfoLog(FragmentShaderID, InfoLogLength, NULL, &FragmentShaderErrorMessage[0]);
-        printf("%s\n", &FragmentShaderErrorMessage[0]);
+        // printf("%s\n", &FragmentShaderErrorMessage[0]);
+        helper.string = "Error!! " + std::string(&FragmentShaderErrorMessage[0]);
+        helper.log(1, helper.string);
     }
 
 
 
     // Link the program
-    printf("Linking program\n");
+    // printf("Linking program\n");
+    helper.log(3, "Linking shader program . . . ");
     GLuint ProgramID = glCreateProgram();
     glAttachShader(ProgramID, VertexShaderID);
     glAttachShader(ProgramID, FragmentShaderID);
@@ -95,7 +108,9 @@ GLuint LoadShaders(const char * vertex_file_path,const char * fragment_file_path
     if ( InfoLogLength > 0 ){
         std::vector<char> ProgramErrorMessage(InfoLogLength+1);
         glGetProgramInfoLog(ProgramID, InfoLogLength, NULL, &ProgramErrorMessage[0]);
-        printf("%s\n", &ProgramErrorMessage[0]);
+        // printf("%s\n", &ProgramErrorMessage[0]);
+        helper.string = "Error!! " + std::string(&ProgramErrorMessage[0]);
+        helper.log(3, helper.string);
     }
 
 

@@ -5,6 +5,7 @@ class OpenglWindow
 {
 public:
     OpenglWindow(GameCore* gameCore);
+    void startRenderLoop();
 
 private:
     GameCore* gameCore;

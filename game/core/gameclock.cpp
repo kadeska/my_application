@@ -50,7 +50,7 @@ void GameClock::start() {
 
 // Handle game ticks
 void GameClock::gameTick() {
-
+    helper.log(4, "gameTick()");
     // Called every 16ms (approx. 60 FPS)
     update();
     render();
@@ -60,13 +60,16 @@ void GameClock::gameTick() {
 // Handle custom event timer
 void GameClock::eventTimerTriggered() {
     // Triggered every 1 second
-    std::cout << "1-second event triggered!" << std::endl;
+    // std::cout << "1-second event triggered!" << std::endl;
+    helper.log(3, "1-second event triggered! ");
 }
 
 // Update game logic
 void GameClock::update() {
     // Update game logic
-    std::cout << "Logic update: " << gameLogicUpdateCount << " Game logic updated" << std::endl;
+    // std::cout << "Logic update: " << gameLogicUpdateCount << " Game logic updated" << std::endl;
+    helper.string = std::string("Logic update: ") + std::to_string(gameLogicUpdateCount) + std::string(" Game logic updated");
+    helper.log(4, helper.string);
     gameLogicUpdateCount++;
 
 }
@@ -74,7 +77,9 @@ void GameClock::update() {
 // Render the game
 void GameClock::render() {
     // Render the game (optional for console apps)
-    std::cout << "Frame: " << frameCount << " Rendering frame" << std::endl;
+    // std::cout << "Frame: " << frameCount << " Rendering frame" << std::endl;
+    helper.string = std::string("Frame: ") + std::to_string(frameCount) + std::string(" Rendering Frame");
+    helper.log(3, helper.string);
     frameCount++;
 }
 
