@@ -25,7 +25,7 @@ WindowManager::WindowManager(int width, int height, const char* title) {
     gameCore = new GameCore(1, true, gameClock, window);
     //gameClock->start();
     gameCore->init();
-    game::Item test("Test Item");
+    game::Item test("Test Item", 1);
     test.printDetails();
 
     game::Inventory* inv = new game::Inventory();
