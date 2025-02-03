@@ -3,7 +3,7 @@
 namespace game {
 game::Inventory* InventoryManager::createNewInventory(std::string name, int ID, int rows, int columns)
 {
-    game::Inventory* newInv = new game::Inventory(1, "test Inv", 4, 4);
+    game::Inventory* newInv = new game::Inventory(ID, name, rows, columns);
     return newInv;
 }
 

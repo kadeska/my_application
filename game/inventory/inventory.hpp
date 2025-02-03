@@ -20,6 +20,8 @@ public:
     bool removeItem(Item item);
     std::vector<game::Item> getInventory();
 
+    void setInventory(const std::vector<game::Item> &newInventory);
+
 private:
     std::vector<game::Item> inventory;
     int ID, rows, columns;

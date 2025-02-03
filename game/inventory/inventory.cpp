@@ -23,6 +23,12 @@ void Inventory::hideInventory()
 
 void Inventory::printInventory()
 {
+    try {
+        for (const Item& item : inventory) {
+            item.printDetails();
+        }
+    } catch (...) {
+    }
 
 }
 
@@ -34,6 +40,11 @@ bool Inventory::addItem(Item item)
 bool Inventory::removeItem(Item item)
 {
     return false;
+}
+
+void Inventory::setInventory(const std::vector<game::Item> &newInventory)
+{
+    inventory = newInventory;
 }
 
 std::vector<Item> Inventory::getInventory()
