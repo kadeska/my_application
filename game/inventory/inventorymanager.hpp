@@ -19,10 +19,10 @@ public:
      * @param name
      * @param ID
      * @param rows
-     * @param colums
+     * @param columns
      * @return
      */
-    game::Inventory* createNewInventory(std::string name, int ID, int rows, int colums);
+    game::Inventory* createNewInventory(std::string name, int ID, int rows, int columns);
     /**
      * @brief getInventoryByID
      * @param ID
