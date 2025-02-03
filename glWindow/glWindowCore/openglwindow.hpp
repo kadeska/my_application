@@ -1,12 +1,13 @@
 #pragma once
-#include "../../game/core/gamecore.hpp"
+//#include "../../game/core/gamecore.hpp"
 
 class OpenglWindow
 {
 public:
-    OpenglWindow(GameCore* gameCore);
-    void startRenderLoop();
+    OpenglWindow();
+    void render();
+    static void closeWindow();
 
 private:
-    GameCore* gameCore;
+    //GameCore* gameCore;
 };

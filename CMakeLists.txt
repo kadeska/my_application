@@ -63,6 +63,7 @@ qt_add_executable(my_application
     glWindow/gl/model/basemodel.hpp glWindow/gl/model/basemodel.cpp
     glWindow/glWindowCore/windowmanager.hpp glWindow/glWindowCore/windowmanager.cpp
     glWindow/glWindowCore/renderer.hpp glWindow/glWindowCore/renderer.cpp
+    game/inventory/item.hpp game/inventory/item.cpp
 )
 
 # Include and link libraries

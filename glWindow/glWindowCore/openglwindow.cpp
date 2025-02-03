@@ -1,4 +1,5 @@
 #include "openglwindow.hpp"
+#include "../../helper.hpp"
 #include "../../game/core/gamecore.hpp"
 // Include standard headers
 #include <stdio.h>
@@ -110,7 +111,7 @@ GLuint uvbuffer;
 GLuint vertexbuffer;
 GLuint VertexArrayID;
 
-OpenglWindow::OpenglWindow(GameCore* gameCore)
+OpenglWindow::OpenglWindow()
 {
     // Initialize GLFW
     if( !glfwInit() )
@@ -192,26 +193,21 @@ OpenglWindow::OpenglWindow(GameCore* gameCore)
     glBindBuffer(GL_ARRAY_BUFFER, uvbuffer);
     glBufferData(GL_ARRAY_BUFFER, sizeof(g_uv_buffer_data), g_uv_buffer_data, GL_STATIC_DRAW);
 
-    // render loop
-    startRenderLoop();
+    // render a frame
+    render();
 
-    // Cleanup VBO and shader
-    glDeleteBuffers(1, &vertexbuffer);
-    glDeleteBuffers(1, &uvbuffer);
-    glDeleteProgram(programID);
-    glDeleteTextures(1, &TextureID);
-    glDeleteVertexArrays(1, &VertexArrayID);
+
 
     // Close OpenGL window and terminate GLFW
-    glfwTerminate();
+   // glfwTerminate();
 
     //return 0;
 }
-void OpenglWindow::startRenderLoop()
+void OpenglWindow::render()
 {
     glBindVertexArray(VertexArrayID); // Bind VAO before rendering
 
-    do { // Main render loop
+//    do { // Main render loop
 
         // Clear the screen
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -267,10 +263,22 @@ void OpenglWindow::startRenderLoop()
         glfwSwapBuffers(glWindow);
         glfwPollEvents();
 
-    } while (glfwGetKey(glWindow, GLFW_KEY_ESCAPE) != GLFW_PRESS &&
-             glfwWindowShouldClose(glWindow) == 0);
+//    } while (glfwGetKey(glWindow, GLFW_KEY_ESCAPE) != GLFW_PRESS &&
+//             glfwWindowShouldClose(glWindow) == 0);
 
     //glfwSetWindowShouldClose(glWindow, true);
 
 
+}
+
+void OpenglWindow::closeWindow()
+{
+    helper.log(3, "Closing GL Window");
+    // Cleanup VBO and shader
+    glDeleteBuffers(1, &vertexbuffer);
+    glDeleteBuffers(1, &uvbuffer);
+    glDeleteProgram(programID);
+    glDeleteTextures(1, &TextureID);
+    glDeleteVertexArrays(1, &VertexArrayID);
+    glfwTerminate();
 }

@@ -4,6 +4,8 @@
 #include <GLFW/glfw3.h>
 #include <iostream>
 #include "openglwindow.hpp"
+#include "../../game/core/gamecore.hpp"
+
 
 class WindowManager {
 public:

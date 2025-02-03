@@ -11,17 +11,21 @@
 #include <string>
 #include <iostream>
 
+#include "../../game/inventory/item.hpp"
+
 //OpenglWindow* window;
 //GameCore* gameCore;
 //GameClock* gameClock;
 
 
 WindowManager::WindowManager(int width, int height, const char* title) {
+    window = new OpenglWindow();
     gameClock = new GameClock(nullptr);
-    gameCore = new GameCore(1, true, gameClock);
-    window = new OpenglWindow(gameCore);
+    gameCore = new GameCore(1, true, gameClock, window);
     //gameClock->start();
     gameCore->init();
+    game::Item test("Test Item");
+    test.printDetails();
 
 }
 

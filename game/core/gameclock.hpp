@@ -3,16 +3,16 @@
 
 #include <QObject>
 #include <QTimer>
+#include "../../glWindow/glWindowCore/openglwindow.hpp"
 
 class GameClock : public QObject {
     Q_OBJECT
 
 public:
-    explicit GameClock(QObject* parent = nullptr);
+    explicit GameClock(OpenglWindow* window, QObject* parent = nullptr);
 
     void start(); // Starts the game clock
     bool isRunning() const { return running; } // Getter for running state
-
     void stop();
 
 private slots:
@@ -20,6 +20,7 @@ private slots:
     void eventTimerTriggered();
 
 private:
+    OpenglWindow* thisWindow;
     void update();
     void render();
 

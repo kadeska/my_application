@@ -1,6 +1,8 @@
 // Include GLFW
 #include <GLFW/glfw3.h>
 //extern GLFWwindow* window; // The "extern" keyword here is to access the variable "window" declared in tutorialXXX.cpp. This is a hack to keep the tutorials simple. Please avoid this.
+#include "openglwindow.hpp"
+#include "../../game/core/gamecore.hpp"
 
 // Include GLM
 #include <glm/glm.hpp>
@@ -35,6 +37,7 @@ float speed = 3.0f; // 3 units / second
 float mouseSpeed = 0.005f;
 
 
+//GameCore gameCore;
 
 void computeMatricesFromInputs(GLFWwindow* window) {
     if (!window) {
@@ -88,6 +91,12 @@ void computeMatricesFromInputs(GLFWwindow* window) {
         position -= right * deltaTime * adjustedSpeed;
     }
 
+
+    if(glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
+        //GameCore::stop();
+        OpenglWindow::closeWindow();
+    }
+
     float FoV = initialFoV;
 
     ProjectionMatrix = glm::perspective(glm::radians(FoV), float(width) / float(height), 0.1f, 100.0f);
@@ -95,3 +104,4 @@ void computeMatricesFromInputs(GLFWwindow* window) {
 
     lastTime = currentTime;
 }
+
