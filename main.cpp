@@ -10,7 +10,7 @@
 // Defines
 UsefulFunctions::StdOutput stdOut;
 
-int Helper::progLogLevel = 4; // Default log level
+int Helper::progLogLevel = 3; // Default log level
 int Helper::skippedLogCount = 0; // Initialize skipped log count
 
 

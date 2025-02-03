@@ -59,7 +59,7 @@ void GameClock::update() {
 // Render the game
 void GameClock::render() {
     helper.string = std::string("Frame: ") + std::to_string(frameCount) + std::string(" Rendering Frame");
-    helper.log(3, helper.string);
+    helper.log(4, helper.string);
     try {
         thisWindow->render();
     } catch (...) { //const std::exception& e) {

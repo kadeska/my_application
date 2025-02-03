@@ -12,6 +12,7 @@
 #include <iostream>
 
 #include "../../game/inventory/item.hpp"
+#include "../../game/inventory/inventory.hpp"
 
 //OpenglWindow* window;
 //GameCore* gameCore;
@@ -26,6 +27,8 @@ WindowManager::WindowManager(int width, int height, const char* title) {
     gameCore->init();
     game::Item test("Test Item");
     test.printDetails();
+
+    game::Inventory* inv = new game::Inventory();
 
 }
 
