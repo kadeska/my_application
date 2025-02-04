@@ -68,6 +68,9 @@ void MainWindow::on_actionGL_Window_triggered()
     try {
         // call function to start window
         //
+        // put this inside a while loop ??
+        // 
+        //
         //startWindow();
         myglWindow = new WindowManager(600, 600, "testing");
 
