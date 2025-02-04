@@ -1,5 +1,6 @@
 #include "gameclock.hpp"
 #include "../../helper.hpp"
+#include "gamecore.hpp"
 #include <iostream>
 
 // Constructor
@@ -26,6 +27,7 @@ GameClock::GameClock(OpenglWindow* window, QObject* parent)
 // Start the game clock
 void GameClock::start() {
     helper.log(3, "GameClock::start()");
+    //if()
     if (!running) {
         tickTimer.start(tickInterval); // Start the tick timer
         eventTimer.start(1000);        // Example: 1-second event timer
@@ -73,4 +75,5 @@ void GameClock::render() {
 // Stop the game clock
 void GameClock::stop() {
     tickTimer.stop();
+
 }

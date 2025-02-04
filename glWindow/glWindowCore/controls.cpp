@@ -2,7 +2,7 @@
 #include <GLFW/glfw3.h>
 //extern GLFWwindow* window; // The "extern" keyword here is to access the variable "window" declared in tutorialXXX.cpp. This is a hack to keep the tutorials simple. Please avoid this.
 #include "openglwindow.hpp"
-#include "../../game/core/gamecore.hpp"
+//#include "../../game/core/gamecore.hpp"
 
 // Include GLM
 #include <glm/glm.hpp>

@@ -23,7 +23,8 @@ void GameCore::init() {
     helper.string = std::string("Game Debug: ") + std::to_string(game_Debug);
     helper.log(3, helper.string);
 
-    gameRunning = true;
+    //gameRunning = true;
+    setGameRunning(true);
     //controls(this);
 
 
@@ -35,18 +36,30 @@ void GameCore::init() {
         helper.log(2, "Warning... GameClock is already running. What happened??");
     }
 
-    if (!gameRunning) {
+    if (!getGameRunning()) {
         helper.log(3, "Bool GameRunning is false");
         helper.log(3, "Setting Bool GameRunning to true because game is now running.");
-        gameRunning = true;
+        //gameRunning = true;
+        setGameRunning(true);
     }
 }
 
 // Stop the game
 void GameCore::stop() {
-    if (gameRunning) {
+    if (getGameRunning()) {
         helper.log(3, "Stopping GameClock . . . ");
         game_Clock->stop();
-        gameRunning = false;
+        //gameRunning = false;
+        setGameRunning(false);
     }
+}
+
+bool GameCore::getGameRunning() const
+{
+    return gameRunning;
+}
+
+void GameCore::setGameRunning(bool newGameRunning)
+{
+    gameRunning = newGameRunning;
 }
