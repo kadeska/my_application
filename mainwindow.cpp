@@ -63,13 +63,20 @@ void MainWindow::on_actionGL_Window_triggered()
     //GameCore* core = new GameCore(1, true, gameClock);
     //core->init();
 
+    createWindow();
+
+    std::cout << "GL Window closed. Returning to Main Window...\n";
+    this->show();
+}
+
+void MainWindow::createWindow(){
     // Create WindowManager
 
     try {
         // call function to start window
         //
         // put this inside a while loop ??
-        // 
+        //
         //
         //startWindow();
         myglWindow = new WindowManager(600, 600, "testing");
@@ -82,11 +89,7 @@ void MainWindow::on_actionGL_Window_triggered()
         this->show();
         return;
     }
-
-    std::cout << "GL Window closed. Returning to Main Window...\n";
-    this->show();
 }
-
 
 
 
@@ -102,13 +105,14 @@ void MainWindow::on_actionSettings_triggered()
 void MainWindow::on_launchButton_clicked()
 {
     helper.log(3, "Launch Button");
-
+    createWindow();
 }
 
 
 void MainWindow::on_settingsButton_clicked()
 {
     helper.log(3, "Settings Button");
+    settingswindow.show();
 }
 
 

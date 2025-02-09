@@ -18,6 +18,7 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     Settings_window settingswindow;
+    void createWindow();
     ~MainWindow();
 
 private slots:
