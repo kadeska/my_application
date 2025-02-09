@@ -28,6 +28,12 @@ private slots:
 
     void on_actionSettings_triggered();
 
+    void on_launchButton_clicked();
+
+    void on_settingsButton_clicked();
+
+    void on_editorButton_clicked();
+
 private:
     Ui::MainWindow *ui;
 

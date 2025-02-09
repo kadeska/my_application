@@ -98,3 +98,22 @@ void MainWindow::on_actionSettings_triggered()
     settingswindow.show();
 }
 
+
+void MainWindow::on_launchButton_clicked()
+{
+    helper.log(3, "Launch Button");
+
+}
+
+
+void MainWindow::on_settingsButton_clicked()
+{
+    helper.log(3, "Settings Button");
+}
+
+
+void MainWindow::on_editorButton_clicked()
+{
+    helper.log(3, "Editor Button");
+}
+
