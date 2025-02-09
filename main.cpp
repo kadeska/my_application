@@ -30,6 +30,12 @@ int main(int argc, char *argv[])
     out += "])";
     helper.log(2, out);
 
+    // Testing out my template
+    // Printer<char*> strprint;
+    // strprint.print("Hello world!", 3);
+    // Printer<int> printer;
+    // printer.print(100, 3);
+
     MainWindow w;
     w.show();
 
