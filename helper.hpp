@@ -62,6 +62,72 @@ public:
 // Declare the global helper instance
 extern Helper helper;
 
+
+/**
+ * @brief The foobar struct template
+ */
+template <typename T>
+struct foobar {
+    T value;
+
+    foobar() {}
+
+    foobar(std::string str) {}
+
+    foobar(T val, std::string str) : value(val) {
+        helper.log(3, "FooBar created: " + str + " | Value: " + std::to_string(value));
+    }
+
+    void display() {
+        // std::cout << "Stored value: " << value << std::endl;
+        helper.log(3, std::string("Stored value: " + std::to_string(value)));
+    }
+};
+
+/**
+ * @brief findMax function template
+ * @param a
+ * @param b
+ * @return
+ */
+template <typename T>
+T findMax(T a, T b) {
+    return (a > b) ? a : b;
+}
+
+// Class template
+
+template <typename T>
+class Box {
+private:
+    T value;
+public:
+    Box(T val) : value(val) {} // constructor
+    void show() {
+        helper.log(3, std::string("Value: " + std::to_string(value)));
+    }
+};
+
+// printer to print custom values or for an easier print function.
+
+template <typename T>
+class Printer {
+public:
+    void print(T value, int loglevel) {
+        helper.log(loglevel, std::to_string(value));
+    }
+};
+
+// specialization for char* c-style strings.
+#include<cstring>
+template <>
+class Printer<char*> {
+public:
+    void print(char* value, int loglevel) {
+        helper.log(loglevel, std::string("String: ") + std::string(value) + " (length: " + std::to_string(strlen(value)) + ")");
+    }
+};
+
 // Namespace for managing background color
 namespace BackgroundColor {
 // Encapsulate RGBA values and provide getters/setters

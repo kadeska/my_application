@@ -119,5 +119,11 @@ void MainWindow::on_settingsButton_clicked()
 void MainWindow::on_editorButton_clicked()
 {
     helper.log(3, "Editor Button");
+    foobar<int> fooInt(10, "An integer");
+    foobar<double> fooDouble(3.14, "A floating-point number");
+    foobar<float> fooFloat(1.618f, "A golden ratio approximation");
+    // foobar<const char*> test("a", "g");
+
+    fooInt.display();
 }
 
