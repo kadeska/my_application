@@ -21,7 +21,7 @@ WindowManager* glwin;
 
 int main(int argc, char *argv[])
 {
-    //std::string arg = argv[1];
+    // this funtionality is broken at the moment, I need to make my own custom timer class.
     if (argc > 1 && std::string(argv[1]) == "NO_QT") {
         helper.log(3, "NO_QT");
         glwin = new WindowManager(600, 600, "testing");
