@@ -3,6 +3,7 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include <iostream>
+#include "renderer.hpp"
 #include "openglwindow.hpp"
 #include "../../game/core/gamecore.hpp"
 
@@ -14,8 +15,10 @@ public:
     //GLFWwindow* getWindow() const;
     //GLFWwindow* window;
     OpenglWindow* window;
+
     GameCore* gameCore;
     GameClock* gameClock;
+    Renderer* renderer;
 private:
 
 };

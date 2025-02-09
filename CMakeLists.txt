@@ -66,6 +66,7 @@ qt_add_executable(my_application
     game/inventory/item.hpp game/inventory/item.cpp
     game/inventory/inventory.hpp game/inventory/inventory.cpp
     game/inventory/inventorymanager.hpp game/inventory/inventorymanager.cpp
+    glWindow/gl/objectloader.hpp glWindow/gl/objectloader.cpp
 )
 
 # Include and link libraries
@@ -91,7 +92,7 @@ target_link_libraries(my_application
 # Copy shader and texture files to the build directory
 configure_file(glWindow/gl/shaders/SimpleVertexShader.vertexshader ${CMAKE_BINARY_DIR}/SimpleVertexShader.vertexshader COPYONLY)
 configure_file(glWindow/gl/shaders/SimpleFragmentShader.fragmentshader ${CMAKE_BINARY_DIR}/SimpleFragmentShader.fragmentshader COPYONLY)
-configure_file(glWindow/gl/uvtemplate.DDS ${CMAKE_BINARY_DIR}/uvtemplate.DDS COPYONLY)
+configure_file(glWindow/gl/uvmap.DDS ${CMAKE_BINARY_DIR}/uvmap.DDS COPYONLY)
 
 # Install rules for shaders and textures
 install(FILES

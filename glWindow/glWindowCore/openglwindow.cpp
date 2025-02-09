@@ -20,6 +20,7 @@ using namespace glm;
 #include <shader.hpp>
 #include <texture.hpp>
 #include <controls.hpp>
+#include <../gl/objectloader.hpp>
 
 
 GLuint programID;
@@ -29,87 +30,91 @@ GLuint TextureID;
 
 // Our vertices. Tree consecutive floats give a 3D vertex; Three consecutive vertices give a triangle.
 // A cube has 6 faces with 2 triangles each, so this makes 6*2=12 triangles, and 12*3 vertices
-static const GLfloat g_vertex_buffer_data[] = {
-    -1.0f,-1.0f,-1.0f,
-    -1.0f,-1.0f, 1.0f,
-    -1.0f, 1.0f, 1.0f,
-    1.0f, 1.0f,-1.0f,
-    -1.0f,-1.0f,-1.0f,
-    -1.0f, 1.0f,-1.0f,
-    1.0f,-1.0f, 1.0f,
-    -1.0f,-1.0f,-1.0f,
-    1.0f,-1.0f,-1.0f,
-    1.0f, 1.0f,-1.0f,
-    1.0f,-1.0f,-1.0f,
-    -1.0f,-1.0f,-1.0f,
-    -1.0f,-1.0f,-1.0f,
-    -1.0f, 1.0f, 1.0f,
-    -1.0f, 1.0f,-1.0f,
-    1.0f,-1.0f, 1.0f,
-    -1.0f,-1.0f, 1.0f,
-    -1.0f,-1.0f,-1.0f,
-    -1.0f, 1.0f, 1.0f,
-    -1.0f,-1.0f, 1.0f,
-    1.0f,-1.0f, 1.0f,
-    1.0f, 1.0f, 1.0f,
-    1.0f,-1.0f,-1.0f,
-    1.0f, 1.0f,-1.0f,
-    1.0f,-1.0f,-1.0f,
-    1.0f, 1.0f, 1.0f,
-    1.0f,-1.0f, 1.0f,
-    1.0f, 1.0f, 1.0f,
-    1.0f, 1.0f,-1.0f,
-    -1.0f, 1.0f,-1.0f,
-    1.0f, 1.0f, 1.0f,
-    -1.0f, 1.0f,-1.0f,
-    -1.0f, 1.0f, 1.0f,
-    1.0f, 1.0f, 1.0f,
-    -1.0f, 1.0f, 1.0f,
-    1.0f,-1.0f, 1.0f
-};
-// Two UV coordinatesfor each vertex. They were created with Blender.
-static const GLfloat g_uv_buffer_data[] = {
-    0.000059f, 0.000004f,
-    0.000103f, 0.336048f,
-    0.335973f, 0.335903f,
-    1.000023f, 0.000013f,
-    0.667979f, 0.335851f,
-    0.999958f, 0.336064f,
-    0.667979f, 0.335851f,
-    0.336024f, 0.671877f,
-    0.667969f, 0.671889f,
-    1.000023f, 0.000013f,
-    0.668104f, 0.000013f,
-    0.667979f, 0.335851f,
-    0.000059f, 0.000004f,
-    0.335973f, 0.335903f,
-    0.336098f, 0.000071f,
-    0.667979f, 0.335851f,
-    0.335973f, 0.335903f,
-    0.336024f, 0.671877f,
-    1.000004f, 0.671847f,
-    0.999958f, 0.336064f,
-    0.667979f, 0.335851f,
-    0.668104f, 0.000013f,
-    0.335973f, 0.335903f,
-    0.667979f, 0.335851f,
-    0.335973f, 0.335903f,
-    0.668104f, 0.000013f,
-    0.336098f, 0.000071f,
-    0.000103f, 0.336048f,
-    0.000004f, 0.671870f,
-    0.336024f, 0.671877f,
-    0.000103f, 0.336048f,
-    0.336024f, 0.671877f,
-    0.335973f, 0.335903f,
-    0.667969f, 0.671889f,
-    1.000004f, 0.671847f,
-    0.667979f, 0.335851f
-};
+// static const GLfloat g_vertex_buffer_data[] = {
+//     -1.0f,-1.0f,-1.0f,
+//     -1.0f,-1.0f, 1.0f,
+//     -1.0f, 1.0f, 1.0f,
+//     1.0f, 1.0f,-1.0f,
+//     -1.0f,-1.0f,-1.0f,
+//     -1.0f, 1.0f,-1.0f,
+//     1.0f,-1.0f, 1.0f,
+//     -1.0f,-1.0f,-1.0f,
+//     1.0f,-1.0f,-1.0f,
+//     1.0f, 1.0f,-1.0f,
+//     1.0f,-1.0f,-1.0f,
+//     -1.0f,-1.0f,-1.0f,
+//     -1.0f,-1.0f,-1.0f,
+//     -1.0f, 1.0f, 1.0f,
+//     -1.0f, 1.0f,-1.0f,
+//     1.0f,-1.0f, 1.0f,
+//     -1.0f,-1.0f, 1.0f,
+//     -1.0f,-1.0f,-1.0f,
+//     -1.0f, 1.0f, 1.0f,
+//     -1.0f,-1.0f, 1.0f,
+//     1.0f,-1.0f, 1.0f,
+//     1.0f, 1.0f, 1.0f,
+//     1.0f,-1.0f,-1.0f,
+//     1.0f, 1.0f,-1.0f,
+//     1.0f,-1.0f,-1.0f,
+//     1.0f, 1.0f, 1.0f,
+//     1.0f,-1.0f, 1.0f,
+//     1.0f, 1.0f, 1.0f,
+//     1.0f, 1.0f,-1.0f,
+//     -1.0f, 1.0f,-1.0f,
+//     1.0f, 1.0f, 1.0f,
+//     -1.0f, 1.0f,-1.0f,
+//     -1.0f, 1.0f, 1.0f,
+//     1.0f, 1.0f, 1.0f,
+//     -1.0f, 1.0f, 1.0f,
+//     1.0f,-1.0f, 1.0f
+// };
+// // Two UV coordinatesfor each vertex. They were created with Blender.
+// static const GLfloat g_uv_buffer_data[] = {
+//     0.000059f, 0.000004f,
+//     0.000103f, 0.336048f,
+//     0.335973f, 0.335903f,
+//     1.000023f, 0.000013f,
+//     0.667979f, 0.335851f,
+//     0.999958f, 0.336064f,
+//     0.667979f, 0.335851f,
+//     0.336024f, 0.671877f,
+//     0.667969f, 0.671889f,
+//     1.000023f, 0.000013f,
+//     0.668104f, 0.000013f,
+//     0.667979f, 0.335851f,
+//     0.000059f, 0.000004f,
+//     0.335973f, 0.335903f,
+//     0.336098f, 0.000071f,
+//     0.667979f, 0.335851f,
+//     0.335973f, 0.335903f,
+//     0.336024f, 0.671877f,
+//     1.000004f, 0.671847f,
+//     0.999958f, 0.336064f,
+//     0.667979f, 0.335851f,
+//     0.668104f, 0.000013f,
+//     0.335973f, 0.335903f,
+//     0.667979f, 0.335851f,
+//     0.335973f, 0.335903f,
+//     0.668104f, 0.000013f,
+//     0.336098f, 0.000071f,
+//     0.000103f, 0.336048f,
+//     0.000004f, 0.671870f,
+//     0.336024f, 0.671877f,
+//     0.000103f, 0.336048f,
+//     0.336024f, 0.671877f,
+//     0.335973f, 0.335903f,
+//     0.667969f, 0.671889f,
+//     1.000004f, 0.671847f,
+//     0.667979f, 0.335851f
+// };
 
 GLuint uvbuffer;
 GLuint vertexbuffer;
 GLuint VertexArrayID;
+
+std::vector<glm::vec3> vertices;
+std::vector<glm::vec2> uvs;
+std::vector<glm::vec3> normals; // Won't be used at the moment.
 
 OpenglWindow::OpenglWindow()
 {
@@ -177,21 +182,39 @@ OpenglWindow::OpenglWindow()
     MatrixID = glGetUniformLocation(programID, "MVP");
 
     // Load the texture
-    Texture = loadDDS("uvtemplate.DDS");
+    Texture = loadDDS("uvmap.DDS");
 
     // Get a handle for our "myTextureSampler" uniform
     TextureID  = glGetUniformLocation(programID, "myTextureSampler");
 
 
+    // bool res = loadOBJ("cube.obj", vertices, uvs, normals);
 
+    // Read our .obj file
+
+    bool res = loadOBJ("/home/joseph/Dev/my_application/game/objects/cube.obj", vertices, uvs, normals);
+    // bool res0 = loadOBJ("/home/joseph/Dev/my_application/game/objects/suzanne.obj", vertices, uvs, normals);
+
+
+    // glGenBuffers(1, &vertexbuffer);
+    // glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
+    // glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_STATIC_DRAW);
+
+
+    // glGenBuffers(1, &uvbuffer);
+    // glBindBuffer(GL_ARRAY_BUFFER, uvbuffer);
+    // glBufferData(GL_ARRAY_BUFFER, sizeof(g_uv_buffer_data), g_uv_buffer_data, GL_STATIC_DRAW);
+
+
+    //GLuint vertexbuffer;
     glGenBuffers(1, &vertexbuffer);
     glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(glm::vec3), &vertices[0], GL_STATIC_DRAW);
 
-
+    //GLuint uvbuffer;
     glGenBuffers(1, &uvbuffer);
     glBindBuffer(GL_ARRAY_BUFFER, uvbuffer);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(g_uv_buffer_data), g_uv_buffer_data, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, uvs.size() * sizeof(glm::vec2), &uvs[0], GL_STATIC_DRAW);
 
     // render a frame
     render();
@@ -203,6 +226,11 @@ OpenglWindow::OpenglWindow()
 
     //return 0;
 }
+
+/**
+ * @brief OpenglWindow::render
+ * Render gets called by gameClock
+ */
 void OpenglWindow::render()
 {
     glBindVertexArray(VertexArrayID); // Bind VAO before rendering
@@ -232,21 +260,46 @@ void OpenglWindow::render()
         glBindTexture(GL_TEXTURE_2D, Texture);
         glUniform1i(TextureID, 0);
 
-        // Bind vertex buffer
+        // // Bind vertex buffer
+        // glEnableVertexAttribArray(0);
+        // glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
+        // glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
+
+        // // Bind UV buffer
+        // glEnableVertexAttribArray(1);
+        // glBindBuffer(GL_ARRAY_BUFFER, uvbuffer);
+        // glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, (void*)0);
+
+        // 1rst attribute buffer : vertices
         glEnableVertexAttribArray(0);
         glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
-        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
+        glVertexAttribPointer(
+            0,                  // attribute
+            3,                  // size
+            GL_FLOAT,           // type
+            GL_FALSE,           // normalized?
+            0,                  // stride
+            (void*)0            // array buffer offset
+            );
 
-        // Bind UV buffer
+        // 2nd attribute buffer : UVs
         glEnableVertexAttribArray(1);
         glBindBuffer(GL_ARRAY_BUFFER, uvbuffer);
-        glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, (void*)0);
+        glVertexAttribPointer(
+            1,                                // attribute
+            2,                                // size
+            GL_FLOAT,                         // type
+            GL_FALSE,                         // normalized?
+            0,                                // stride
+            (void*)0                          // array buffer offset
+            );
 
         // Draw the first cube
-        glDrawArrays(GL_TRIANGLES, 0, 36);
+        //glDrawArrays(GL_TRIANGLES, 0, 36);
+        glDrawArrays(GL_TRIANGLES, 0, vertices.size() );
 
         // === Second Cube ===
-        glm::mat4 ModelMatrix2 = glm::translate(glm::mat4(1.0f), glm::vec3(2.0f, 0.0f, 0.0f)); // Move right
+        glm::mat4 ModelMatrix2 = glm::translate(glm::mat4(1.0f), glm::vec3(2.0f, 1.0f, 0.0f)); // Move right
         glm::mat4 MVP2 = ProjectionMatrix * ViewMatrix * ModelMatrix2;
 
         // Send MVP matrix for second cube
