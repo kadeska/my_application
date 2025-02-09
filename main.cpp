@@ -1,6 +1,7 @@
 #include "mainwindow.hpp"
 //#include "glWindow/glWindowCore/openglwindow.hpp"
 #include "helper.hpp"
+#include "glWindow/glWindowCore/windowmanager.hpp"
 
 
 #include <QApplication>
@@ -13,11 +14,20 @@ UsefulFunctions::StdOutput stdOut;
 int Helper::progLogLevel = 3; // Default log level
 int Helper::skippedLogCount = 0; // Initialize skipped log count
 
+WindowManager* glwin;
+
 
 //functions
 
 int main(int argc, char *argv[])
 {
+    //std::string arg = argv[1];
+    if (argc > 1 && std::string(argv[1]) == "NO_QT") {
+        helper.log(3, "NO_QT");
+        glwin = new WindowManager(600, 600, "testing");
+        return 0;
+    }
+
     QApplication a(argc, argv);
 
     helper.log(3, "Main Function");
@@ -35,6 +45,7 @@ int main(int argc, char *argv[])
     // strprint.print("Hello world!", 3);
     // Printer<int> printer;
     // printer.print(100, 3);
+
 
     MainWindow w;
     w.show();
