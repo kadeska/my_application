@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QTimer>
 #include "../../glWindow/glWindowCore/openglwindow.hpp"
+#include "gameloopmanager.hpp"
 
 
 namespace myGameClock_QT {
@@ -46,9 +47,11 @@ namespace myGameClock {
 class GameClock {
 public:
     explicit GameClock(OpenglWindow* window, QObject* parent = nullptr);
+    game::GameLoopManager* gameLoop;
 
     void start(); // Starts the game clock
     bool isRunning() const { return running; } // Getter for running state
+    void runGameLoop();
     void stop();
 
     void setRunning(bool newRunning);

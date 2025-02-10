@@ -67,6 +67,7 @@ qt_add_executable(my_application
     game/inventory/inventory.hpp game/inventory/inventory.cpp
     game/inventory/inventorymanager.hpp game/inventory/inventorymanager.cpp
     glWindow/gl/objectloader.hpp glWindow/gl/objectloader.cpp
+    game/core/gameloopmanager.hpp game/core/gameloopmanager.cpp
 )
 
 # Include and link libraries

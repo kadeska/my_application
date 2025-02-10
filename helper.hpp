@@ -14,6 +14,8 @@ public:
 
     // This string is for contructing a compound string, used anywhere that helper.hpp is included.
     std::string string;
+    // This bool is a flag to determin if we should use QT framework
+    bool enable_QT;
     // logLevel is used to set the programs log level.
     // 0 = no logging
 

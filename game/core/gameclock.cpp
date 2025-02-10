@@ -84,6 +84,7 @@ void QTGameClock::stop() {
 }
 }
 
+
 namespace myGameClock {
 
 GameClock::GameClock(OpenglWindow *window, QObject *parent)
@@ -99,22 +100,37 @@ GameClock::GameClock(OpenglWindow *window, QObject *parent)
 
 void GameClock::start()
 {
+    std::cout << "Starting game loop...\n";
+    gameLoop = new game::GameLoopManager(this);
+    gameLoop->start();
 
+    //std::cout << "Press Enter to stop the game loop.\n";
+    std::cin.get(); // Wait for user input
+
+    //gameLoop.stop();
+    //std::cout << "Game loop stopped.\n";
+}
+
+void GameClock::runGameLoop() {
+    helper.log(3, "GameClock::gameLoop()");
+    update();
+    render();
 }
 
 void GameClock::stop()
 {
-
+    gameLoop->stop();
 }
 
 void GameClock::update()
 {
-
+    helper.log(3, "GameClock::update()");
 }
 
 void GameClock::render()
 {
-
+    helper.log(3, "GameClock::render()");
+    thisWindow->render();
 }
 
 int GameClock::getFrameCount() const

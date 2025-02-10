@@ -13,6 +13,7 @@ GameCore::GameCore(int gameID, bool gameDebug, myGameClock_QT::QTGameClock* game
 
 // Constructor for non QT instance
 GameCore::GameCore(int gameID, bool gameDebug, myGameClock::GameClock *gameClock, OpenglWindow *window)
+    : game_ID(gameID), game_Debug(gameDebug), game_Clock(gameClock), gameRunning(false)
 {
     helper.log(3, "GameCore(int gameID, bool gameDebug, GameClock* gameClock)");
 }
@@ -33,14 +34,29 @@ void GameCore::init() {
     setGameRunning(true);
     //controls(this);
 
+    helper.log(3, std::to_string(helper.enable_QT));
+    //std::cout << helper.enable_QT << '\n';
 
-    if (!qt_game_Clock->isRunning()) {
-        helper.log(3, "GameClock is not running!");
-        helper.log(3, "Starting GameClock . . . ");
-        qt_game_Clock->start();  // Start the clock
-    } else {
-        helper.log(2, "Warning... GameClock is already running. What happened??");
+    if(helper.enable_QT) { // QT enabled so use qt_game_clock
+        helper.log(3, "true" + std::to_string(helper.enable_QT));
+        if (!qt_game_Clock->isRunning()) {
+            helper.log(3, "QT GameClock is not running!");
+            helper.log(3, "Starting QT GameClock . . . ");
+            qt_game_Clock->start();  // Start the QT clock
+        } else {
+            helper.log(2, "Warning... QT GameClock is already running. What happened??");
+        }
+    } else if(!helper.enable_QT){ // QT is not enabled so use game_clock
+        helper.log(3, "false" + std::to_string(helper.enable_QT));
+        if (!game_Clock->isRunning()) {
+            helper.log(3, "GameClock is not running!");
+            helper.log(3, "Starting GameClock . . . ");
+            game_Clock->start();  // Start the clock
+        } else {
+            helper.log(2, "Warning... GameClock is already running. What happened??");
+        }
     }
+
 
     if (!getGameRunning()) {
         helper.log(3, "Bool GameRunning is false");
@@ -54,7 +70,12 @@ void GameCore::init() {
 void GameCore::stop() {
     if (getGameRunning()) {
         helper.log(3, "Stopping GameClock . . . ");
-        qt_game_Clock->stop();
+        if(helper.enable_QT){
+            qt_game_Clock->stop();
+        } else if(!helper.enable_QT){
+            game_Clock->stop();
+        }
+
         //gameRunning = false;
         setGameRunning(false);
     }

@@ -18,6 +18,7 @@ public:
      * @param noqt true or false, are we uing qt?
      */
     WindowManager(int width, int height, const char* title, bool useqt);
+    void gameloop_noQT();
     ~WindowManager();
     //GLFWwindow* getWindow() const;
     //GLFWwindow* window;

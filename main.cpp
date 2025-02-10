@@ -15,6 +15,7 @@ int Helper::progLogLevel = 3; // Default log level
 int Helper::skippedLogCount = 0; // Initialize skipped log count
 
 WindowManager* glwin;
+//bool enable_QT;
 
 
 //functions
@@ -24,6 +25,7 @@ int main(int argc, char *argv[])
     // this funtionality is broken at the moment, I need to make my own custom timer class.
     if (argc > 1 && std::string(argv[1]) == "NO_QT") {
         helper.log(3, "NO_QT");
+        helper.enable_QT = false;
         helper.log(3, "Main Function");
         stdOut.print("Testing standard output");
         std::string out = "main(argc: " + std::to_string(argc) + ", argv: [";
@@ -40,6 +42,7 @@ int main(int argc, char *argv[])
         return 0;
     }
 
+    helper.enable_QT = true;
     QApplication a(argc, argv);
     helper.log(3, "Main Function");
     stdOut.print("Testing standard output");

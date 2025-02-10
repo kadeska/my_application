@@ -13,6 +13,7 @@
 
 #include "../../game/inventory/item.hpp"
 #include "../../game/inventory/inventory.hpp"
+#include "../../game/core/gameloopmanager.hpp"
 
 //OpenglWindow* window;
 //GameCore* gameCore;
@@ -28,6 +29,7 @@ WindowManager::WindowManager(int width, int height, const char* title, bool useq
     } else {
         gameClock = new myGameClock::GameClock(window, nullptr);
         gameCore = new GameCore(1, true, gameClock, window);
+        //gameloop_noQT();
     }
 
 
@@ -39,6 +41,21 @@ WindowManager::WindowManager(int width, int height, const char* title, bool useq
 
     game::Inventory* inv = new game::Inventory();
 
+}
+
+void WindowManager::gameloop_noQT() {
+    //game::GameLoopManager gameLoop;
+
+    std::cout << "Starting game loop...\n";
+    //gameLoop.start();
+
+    std::cout << "Press Enter to stop the game loop.\n";
+    //std::cin.get(); // Wait for user input
+
+    //gameLoop.stop();
+    std::cout << "Game loop stopped.\n";
+
+    return;
 }
 
 WindowManager::~WindowManager() {
