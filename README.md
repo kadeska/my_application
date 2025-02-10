@@ -2,6 +2,9 @@
 
 This is my 3D game project created using QT Creator as my IDE. Why QT Creator you might ask, well, because I like the feel of using QT Creator. It offers a cross platform windowing system, plus it has a neat UI tool to build such windows. I use QT creator to make development tools. I can still build my game without the use of QT Creator once its ready for the first release. 
 
+I use blender for modeling, texturing, animation, and level/world design. 
+
+
 ##### story
 
 This is going to be a game about adventure and survival. You wake up lost in a richly dense forest, with some scratches and bruises, as well as what feels like a broken rib.
