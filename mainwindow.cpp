@@ -79,7 +79,7 @@ void MainWindow::createWindow(){
         //
         //
         //startWindow();
-        myglWindow = new WindowManager(600, 600, "testing");
+        myglWindow = new WindowManager(400, 300, "testing", true);
 
     } catch (const std::exception& e) {
         std::cerr << "Failed to initialize window: " << e.what() << std::endl;

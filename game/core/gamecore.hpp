@@ -24,7 +24,10 @@
 class GameCore
 {
 public:
-    GameCore(int gameID, bool gameDebug, GameClock* gameClock, OpenglWindow* window);
+    // QT GameCore
+    GameCore(int gameID, bool gameDebug, myGameClock_QT::QTGameClock* gameClock, OpenglWindow* window);
+    // NON QT GameCore
+    GameCore(int gameID, bool gameDebug, myGameClock::GameClock* gameClock, OpenglWindow* window);
     ~GameCore();
 
     /**
@@ -38,7 +41,8 @@ public:
      */
     void stop();
 
-    GameClock* game_Clock;
+    myGameClock_QT::QTGameClock* qt_game_Clock;
+    myGameClock::GameClock* game_Clock;
     bool gameRunning;
 
 

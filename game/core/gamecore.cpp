@@ -4,9 +4,15 @@
 #include <iostream>
 #include <string>
 
-// Constructor
-GameCore::GameCore(int gameID, bool gameDebug, GameClock* gameClock, OpenglWindow* window)
-    : game_ID(gameID), game_Debug(gameDebug), game_Clock(gameClock), gameRunning(false)
+// Constructor for QT based instance
+GameCore::GameCore(int gameID, bool gameDebug, myGameClock_QT::QTGameClock* gameClock, OpenglWindow* window)
+    : game_ID(gameID), game_Debug(gameDebug), qt_game_Clock(gameClock), gameRunning(false)
+{
+    helper.log(3, "GameCore(int gameID, bool gameDebug, GameClock* gameClock)");
+}
+
+// Constructor for non QT instance
+GameCore::GameCore(int gameID, bool gameDebug, myGameClock::GameClock *gameClock, OpenglWindow *window)
 {
     helper.log(3, "GameCore(int gameID, bool gameDebug, GameClock* gameClock)");
 }
@@ -28,10 +34,10 @@ void GameCore::init() {
     //controls(this);
 
 
-    if (!game_Clock->isRunning()) {
+    if (!qt_game_Clock->isRunning()) {
         helper.log(3, "GameClock is not running!");
         helper.log(3, "Starting GameClock . . . ");
-        game_Clock->start();  // Start the clock
+        qt_game_Clock->start();  // Start the clock
     } else {
         helper.log(2, "Warning... GameClock is already running. What happened??");
     }
@@ -48,7 +54,7 @@ void GameCore::init() {
 void GameCore::stop() {
     if (getGameRunning()) {
         helper.log(3, "Stopping GameClock . . . ");
-        game_Clock->stop();
+        qt_game_Clock->stop();
         //gameRunning = false;
         setGameRunning(false);
     }
