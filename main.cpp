@@ -20,6 +20,12 @@ WindowManager* glwin;
 
 //functions
 
+/**
+ * @brief main
+ * @param argc
+ * @param argv
+ * @return
+ */
 int main(int argc, char *argv[])
 {
     // this funtionality is broken at the moment, I need to make my own custom timer class.
